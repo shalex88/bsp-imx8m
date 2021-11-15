@@ -3,9 +3,9 @@
 set -e
 
 directory="var-fsl-yocto"
-bsp_version="fsl-warrior"
+bsp_version="fsl-zeus"
 
-src_version="imx-4.19.35-1.1.0-var01"
+src_version="imx-5.4.70-2.3.2-var01"
 
 # create the directory
 mkdir -p ${directory}
@@ -20,4 +20,4 @@ git config --global color.ui true
 repo init -u https://github.com/varigit/variscite-bsp-platform.git -b ${bsp_version} -m ${src_version}.xml
 repo sync -j4
 
-echo "Done, type \"MACHINE=imx8mm-var-dart DISTRO=fsl-imx-xwayland . var-setup-release.sh\" to create the build environment"
+echo "Done, type \"MACHINE=imx8mp-var-dart DISTRO=fsl-imx-xwayland . var-setup-release.sh\" to create the build environment"

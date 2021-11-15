@@ -1,9 +1,9 @@
-# bsp-imx8mm-warrior
+# bsp-imx8mp-zeus
 
 ## Download the sources
 
 ```bash
-git clone https://github.com/shalex88/bsp-imx8m bsp-imx8mm-warrior -b bsp-imx8mm-warrior
+git clone https://github.com/shalex88/bsp-imx8m bsp-imx8mp-zeus -b bsp-imx8mp-zeus
 ```
 
 ## Build docker container (internet connection needed)
@@ -23,7 +23,7 @@ git clone https://github.com/shalex88/bsp-imx8m bsp-imx8mm-warrior -b bsp-imx8mm
 
 ```bash
 cd var-fsl-yocto
-MACHINE=imx8mm-var-dart DISTRO=fsl-imx-xwayland . var-setup-release.sh
+MACHINE=imx8mp-var-dart DISTRO=fsl-imx-xwayland . var-setup-release.sh
 ```
 
 ```bash

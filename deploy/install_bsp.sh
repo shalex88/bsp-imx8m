@@ -45,12 +45,12 @@ check_board()
 {
 	if grep -q "i.MX8MM" /sys/devices/soc0/soc_id; then
 		BOARD=imx8mm-var-dart
-		DTB_PREFIX=fsl-imx8mm-var-dart
+		DTB_PREFIX=imx8mm-var-dart
 		BLOCK=mmcblk2
 		BOOTLOADER_OFFSET=33
 	elif grep -q "i.MX8MN" /sys/devices/soc0/soc_id; then
 		BOARD=imx8mn-var-som
-		DTB_PREFIX=fsl-imx8mn-var-som
+		DTB_PREFIX=imx8mn-var-som
 		BLOCK=mmcblk2
 		BOOTLOADER_OFFSET=32
 	elif grep -q "i.MX8MP" /sys/devices/soc0/soc_id; then
@@ -59,12 +59,12 @@ check_board()
 		BOOTLOADER_OFFSET=32
 	elif grep -q "i.MX8QXP" /sys/devices/soc0/soc_id; then
 		BOARD=imx8qxp-var-som
-		DTB_PREFIX=fsl-imx8qxp-var-som
+		DTB_PREFIX=imx8qxp-var-som
 		BLOCK=mmcblk0
 		BOOTLOADER_OFFSET=32
 	elif grep -q "i.MX8QM" /sys/devices/soc0/soc_id; then
 		BOARD=imx8qm-var-som
-		DTB_PREFIX=fsl-imx8qm-var-som
+		DTB_PREFIX=imx8qm-var-som
 		BLOCK=mmcblk0
 		BOOTLOADER_OFFSET=32
 
@@ -75,7 +75,7 @@ check_board()
 		fi
 	elif grep -q "i.MX8MQ" /sys/devices/soc0/soc_id; then
 		BOARD=imx8mq-var-dart
-		DTB_PREFIX=fsl-imx8mq-var-dart
+		DTB_PREFIX=imx8mq-var-dart
 		BLOCK=mmcblk0
 		BOOTLOADER_OFFSET=33
 		if [[ $DISPLAY != "lvds" && $DISPLAY != "hdmi" && \
@@ -250,7 +250,7 @@ install_rootfs_to_emmc()
 	if [[ ${BOARD} = "imx8qm-var-som" ]]; then
 		# Create DTB symlinks
 		(cd ${MOUNTDIR}/${BOOTDIR}; ln -fs ${DTB_PREFIX}-${DISPLAY}.dtb ${DTB_PREFIX}.dtb)
-		(cd ${MOUNTDIR}/${BOOTDIR}; ln -fs fsl-imx8qm-var-spear-${DISPLAY}.dtb fsl-imx8qm-var-spear.dtb)
+		(cd ${MOUNTDIR}/${BOOTDIR}; ln -fs imx8qm-var-spear-${DISPLAY}.dtb imx8qm-var-spear.dtb)
 	fi
 
 	# Adjust u-boot-fw-utils for eMMC on the installed rootfs
@@ -295,16 +295,20 @@ install_bsp_suplement_to_emmc()
 stop_udev()
 {
 	if [ -f /lib/systemd/system/systemd-udevd.service ]; then
-		systemctl -q mask --run-time systemd-udevd
-		systemctl -q stop systemd-udevd
+		systemctl -q stop \
+			systemd-udevd-kernel.socket \
+			systemd-udevd-control.socket \
+			systemd-udevd
 	fi
 }
 
 start_udev()
 {
 	if [ -f /lib/systemd/system/systemd-udevd.service ]; then
-		systemctl -q mask --run-time systemd-udevd
-		systemctl -q start systemd-udevd
+		systemctl -q start \
+			systemd-udevd-kernel.socket \
+			systemd-udevd-control.socket \
+			systemd-udevd
 	fi
 }
 
