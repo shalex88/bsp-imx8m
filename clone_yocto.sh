@@ -20,4 +20,8 @@ git config --global color.ui true
 repo init -u https://github.com/varigit/variscite-bsp-platform.git -b ${bsp_version} -m ${src_version}.xml
 repo sync -j4
 
+# Clone Hailo layer
+cd sources
+git clone https://github.com/hailo-ai/meta-hailo -b zeus
+
 echo "Done, type \"MACHINE=imx8mp-var-dart DISTRO=fsl-imx-xwayland . var-setup-release.sh\" to create the build environment"
