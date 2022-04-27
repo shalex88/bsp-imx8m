@@ -37,7 +37,13 @@ ln -sf ../../../site.conf site.conf
 ```bash
 bitbake fsl-image-qt5 --runonly=fetch -k
 bitbake imx-boot --runonly=fetch -k
-bitbake meta-toolchain --runonly=fetch -k
+```
+
+## Build the SDK (internet connection needed)
+
+```bash
+# Append MemoryLimit=8G to limit the memory usage
+bitbake fsl-image-qt5 -c populate_sdk
 ```
 
 ## Build the image
