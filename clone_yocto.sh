@@ -23,5 +23,6 @@ repo sync -j4
 # Clone Hailo layer
 cd sources
 git clone https://github.com/hailo-ai/meta-hailo -b zeus
+git clone https://github.com/shalex88/meta-hailo-offlinebuild.git -b zeus
 
 echo "Done, type \"MACHINE=imx8mp-var-dart DISTRO=fsl-imx-xwayland . var-setup-release.sh\" to create the build environment"
