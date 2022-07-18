@@ -18,7 +18,7 @@ git config --global color.ui true
 
 # Clone poky and other layers
 repo init -u https://github.com/varigit/variscite-bsp-platform.git -b ${bsp_version} -m ${src_version}.xml
-repo sync -j4
+repo sync -j"$(nproc)"
 
 # Clone Hailo layer
 cd sources
